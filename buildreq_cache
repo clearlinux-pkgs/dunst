@@ -1,0 +1,6 @@
+1.3.2
+pkgconfig(dbus-1)
+pkgconfig(libxdg-basedir)
+pkgconfig(xinerama)
+pkgconfig(xrandr)
+pkgconfig(xscrnsaver)
