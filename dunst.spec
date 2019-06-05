@@ -4,7 +4,7 @@
 #
 Name     : dunst
 Version  : 1.3.2
-Release  : 1
+Release  : 2
 URL      : https://github.com/dunst-project/dunst/archive/v1.3.2.tar.gz
 Source0  : https://github.com/dunst-project/dunst/archive/v1.3.2.tar.gz
 Summary  : No detailed summary available
