@@ -4,21 +4,36 @@
 #
 Name     : dunst
 Version  : 1.4.1
-Release  : 3
+Release  : 4
 URL      : https://github.com/dunst-project/dunst/archive/v1.4.1/dunst-1.4.1.tar.gz
 Source0  : https://github.com/dunst-project/dunst/archive/v1.4.1/dunst-1.4.1.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause
+Requires: dunst-bin = %{version}-%{release}
 Requires: dunst-data = %{version}-%{release}
 Requires: dunst-license = %{version}-%{release}
+Requires: dunst-man = %{version}-%{release}
+Requires: dunst-services = %{version}-%{release}
 BuildRequires : gdk-pixbuf-dev
 BuildRequires : gtk+-dev
 BuildRequires : pkgconfig(dbus-1)
 BuildRequires : pkgconfig(xscrnsaver)
+BuildRequires : systemd-dev
 
 %description
 [![CircleCI](https://circleci.com/gh/dunst-project/dunst/tree/master.svg?style=svg)](https://circleci.com/gh/dunst-project/dunst/tree/master) [![Build Status](https://travis-ci.org/dunst-project/dunst.svg?branch=master)](https://travis-ci.org/dunst-project/dunst) [![Coverage Status](https://coveralls.io/repos/github/dunst-project/dunst/badge.svg?branch=master)](https://coveralls.io/github/dunst-project/dunst?branch=master)
+
+%package bin
+Summary: bin components for the dunst package.
+Group: Binaries
+Requires: dunst-data = %{version}-%{release}
+Requires: dunst-license = %{version}-%{release}
+Requires: dunst-services = %{version}-%{release}
+
+%description bin
+bin components for the dunst package.
+
 
 %package data
 Summary: data components for the dunst package.
@@ -36,6 +51,22 @@ Group: Default
 license components for the dunst package.
 
 
+%package man
+Summary: man components for the dunst package.
+Group: Default
+
+%description man
+man components for the dunst package.
+
+
+%package services
+Summary: services components for the dunst package.
+Group: Systemd services
+
+%description services
+services components for the dunst package.
+
+
 %prep
 %setup -q -n dunst-1.4.1
 cd %{_builddir}/dunst-1.4.1
@@ -45,32 +76,45 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1579627937
+export SOURCE_DATE_EPOCH=1602040138
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
-make  %{?_smp_mflags}
+make  %{?_smp_mflags}  PREFIX=/usr all
 
 
 %install
-export SOURCE_DATE_EPOCH=1579627937
+export SOURCE_DATE_EPOCH=1602040138
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/dunst
 cp %{_builddir}/dunst-1.4.1/LICENSE %{buildroot}/usr/share/package-licenses/dunst/5c497cb4ca1111f16e84b8338dc15fa9efad9ffa
-%make_install
+%make_install PREFIX=/usr
 
 %files
 %defattr(-,root,root,-)
 
+%files bin
+%defattr(-,root,root,-)
+/usr/bin/dunst
+
 %files data
 %defattr(-,root,root,-)
 /usr/share/dbus-1/services/org.knopwob.dunst.service
+/usr/share/dunst/dunstrc
 
 %files license
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/dunst/5c497cb4ca1111f16e84b8338dc15fa9efad9ffa
+
+%files man
+%defattr(0644,root,root,0755)
+/usr/share/man/man1/dunst.1
+
+%files services
+%defattr(-,root,root,-)
+/usr/lib/systemd/user/dunst.service
