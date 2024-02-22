@@ -1,6 +1,5 @@
-1.9.0
+1.10.0
 pkgconfig(libnotify)
 pkgconfig(wayland-client)
 pkgconfig(wayland-cursor)
-pkgconfig(wayland-protocols)
 pkgconfig(xscrnsaver)
