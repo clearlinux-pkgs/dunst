@@ -6,10 +6,10 @@
 # autospec commit: 5424026
 #
 Name     : dunst
-Version  : 1.12.0
-Release  : 9
-URL      : https://github.com/dunst-project/dunst/archive/v1.12.0/dunst-1.12.0.tar.gz
-Source0  : https://github.com/dunst-project/dunst/archive/v1.12.0/dunst-1.12.0.tar.gz
+Version  : 1.12.1
+Release  : 10
+URL      : https://github.com/dunst-project/dunst/archive/v1.12.1/dunst-1.12.1.tar.gz
+Source0  : https://github.com/dunst-project/dunst/archive/v1.12.1/dunst-1.12.1.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause
@@ -76,10 +76,10 @@ services components for the dunst package.
 
 
 %prep
-%setup -q -n dunst-1.12.0
-cd %{_builddir}/dunst-1.12.0
+%setup -q -n dunst-1.12.1
+cd %{_builddir}/dunst-1.12.1
 pushd ..
-cp -a dunst-1.12.0 buildavx2
+cp -a dunst-1.12.1 buildavx2
 popd
 
 %build
@@ -87,7 +87,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1733167817
+export SOURCE_DATE_EPOCH=1735079026
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -130,7 +130,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1733167817
+export SOURCE_DATE_EPOCH=1735079026
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/dunst
 cp %{_builddir}/dunst-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/dunst/5c497cb4ca1111f16e84b8338dc15fa9efad9ffa || :
@@ -175,6 +175,7 @@ rm -f %{buildroot}*/usr/etc/xdg/dunst/dunstrc
 %defattr(0644,root,root,0755)
 /usr/share/man/man1/dunst.1
 /usr/share/man/man1/dunstctl.1
+/usr/share/man/man1/dunstify.1
 /usr/share/man/man5/dunst.5
 
 %files services
